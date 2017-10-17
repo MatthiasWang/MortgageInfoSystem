@@ -12,6 +12,7 @@ public class Mortgage {
     private int currentLoan;
     private LocalDate startDate;
     private LocalDate endDate;
+    private LocalDate lastPaymentDate;
     private int interestPoints;//points per year
     private Map<LocalDate,Payment> payments;
     private MortgageStrategy ms;
@@ -20,6 +21,7 @@ public class Mortgage {
         this.initialLoan = initialLoan;
         this.currentLoan = initialLoan;
         this.startDate = startDate;
+        this.lastPaymentDate = startDate;
         this.endDate = endDate;
         this.interestPoints = interestPoints;
         this.payments = new HashMap<>();
@@ -28,7 +30,7 @@ public class Mortgage {
     public Payment getRequiredPayment(LocalDate date){
 
 
-        return null;
+        return ms.calculatePayment(this,date);
     }
 
 
@@ -67,7 +69,11 @@ public class Mortgage {
         return ms;
     }
 
-    public static int relativeMonths(LocalDate endDate,LocalDate startDate){
+    public LocalDate getLastPaymentDate() {
+        return lastPaymentDate;
+    }
+
+    public static int relativeMonths(LocalDate endDate, LocalDate startDate){
         return 12*(endDate.getYear()-startDate.getYear())
                 +(endDate.getMonth().getValue()-startDate.getMonth().getValue());
     }
