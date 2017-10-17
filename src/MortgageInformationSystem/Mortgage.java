@@ -12,13 +12,13 @@ public class Mortgage {
     private int currentLoan;
     private LocalDate startDate;
     private LocalDate endDate;
-    private int interestPoints;
+    private int interestPoints;//points per year
     private Map<LocalDate,Payment> payments;
     private MortgageStrategy ms;
 
-    public Mortgage(int initialLoan, int currentLoan, LocalDate startDate, LocalDate endDate, int interestPoints) {
+    public Mortgage(int initialLoan,LocalDate startDate, LocalDate endDate, int interestPoints) {
         this.initialLoan = initialLoan;
-        this.currentLoan = currentLoan;
+        this.currentLoan = initialLoan;
         this.startDate = startDate;
         this.endDate = endDate;
         this.interestPoints = interestPoints;
@@ -33,7 +33,7 @@ public class Mortgage {
 
 
     public void makePayment(Payment p){
-
+        this.currentLoan = this.currentLoan - p.getRedemption();
     }
 
     public void setMortgageStrategy(MortgageStrategy ms){
@@ -55,4 +55,20 @@ public class Mortgage {
         return null;
     }
 
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public MortgageStrategy getMs() {
+        return ms;
+    }
+
+    public static int relativeMonths(LocalDate endDate,LocalDate startDate){
+        return 12*(endDate.getYear()-startDate.getYear())
+                +(endDate.getMonth().getValue()-startDate.getMonth().getValue());
+    }
 }
