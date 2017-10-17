@@ -28,8 +28,6 @@ public class Mortgage {
     }
 
     public Payment getRequiredPayment(LocalDate date){
-
-
         return ms.calculatePayment(this,date);
     }
 
@@ -65,7 +63,7 @@ public class Mortgage {
         return endDate;
     }
 
-    public MortgageStrategy getMs() {
+    public MortgageStrategy getMortgageStrategy() {
         return ms;
     }
 
