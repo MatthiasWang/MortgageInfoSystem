@@ -34,6 +34,7 @@ public class Mortgage {
 
     public void makePayment(Payment p){
         this.currentLoan = this.currentLoan - p.getRedemption();
+        this.lastPaymentDate = p.getDate();
     }
 
     public void setMortgageStrategy(MortgageStrategy ms){

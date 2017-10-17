@@ -15,9 +15,10 @@ public class AmortizedMortgageStrategy implements MortgageStrategy {
     }
     @Override
     public Payment calculatePayment(Mortgage mortgage,LocalDate date){
+       // System.out.println(mortgage.getCurrentLoan()*relativeMonths(date,mortgage.getLastPaymentDate())*mortgage.getInterestPoints()/1200);
         return new Payment(date,
-                this.payPerMonth - mortgage.getCurrentLoan()*relativeMonths(mortgage.getLastPaymentDate(),date)*mortgage.getInterestPoints()/100,
-                mortgage.getCurrentLoan()*relativeMonths(mortgage.getLastPaymentDate(),date)*mortgage.getInterestPoints()/100);
+                this.payPerMonth - mortgage.getCurrentLoan()*relativeMonths(date,mortgage.getLastPaymentDate())*mortgage.getInterestPoints()/1200,
+                mortgage.getCurrentLoan()*relativeMonths(date,mortgage.getLastPaymentDate())*mortgage.getInterestPoints()/1200);
     }
 
     public void setPayPerMonth(int payPerMonth) {
